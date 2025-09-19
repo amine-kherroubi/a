@@ -1,0 +1,84 @@
+% =============================================================================
+% PACKAGES CONFIGURATION
+% =============================================================================
+
+% Encoding and fonts
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+
+% Language support
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\setotherlanguage{arabic}
+\newfontfamily\arabicfont[Script=Arabic,Scale=1.1]{Scheherazade}
+
+% Page layout and geometry
+\usepackage[top=2.5cm,bottom=2.5cm,right=2.5cm,left=2.5cm]{geometry}
+\usepackage{changepage}
+\usepackage{fancyhdr}
+
+% Graphics and figures
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{placeins}
+
+% Tables
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{colortbl}
+
+% Math and algorithms
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+
+% Lists and enumerations
+\usepackage{enumitem}
+
+% Cross-references and hyperlinks
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{url}
+
+% Bibliography
+\usepackage[
+    style=authoryear,
+    backend=biber,
+    natbib=true,
+    doi=false,
+    isbn=false,
+    eprint=false,
+    maxcitenames=2,
+    uniquelist=false
+]{biblatex}
+
+% Table of contents and lists
+\usepackage[nottoc,notlof,notlot]{tocbibind}
+\usepackage{tocloft}
+
+% Appendices
+\usepackage[page,toc,titletoc,title]{appendix}
+
+% Acronyms
+\usepackage[footnote]{acronym}
+
+% Code listings (if needed)
+\usepackage{listings}
+\usepackage{minted}
+
+% Miscellaneous
+\usepackage{afterpage}
+\usepackage{etoolbox}
+\usepackage{xspace}
+\usepackage{microtype}

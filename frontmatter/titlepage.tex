@@ -1,17 +1,7 @@
-\documentclass[a4paper,12pt]{report}
-\usepackage[utf8]{inputenc}
-\usepackage{fontspec}
-\usepackage{xcolor,graphicx}
-\usepackage[top=0.6in,bottom=0.6in,right=1in,left=1in]{geometry}
-\graphicspath{{images/}}
-\newlength\figureheight
-\newlength\figurewidth
-\usepackage{polyglossia}
-\setmainlanguage{french}
-\setotherlanguage{arabic}
-\newfontfamily\arabicfont[Script=Arabic,Scale=1.1]{Scheherazade}
+% =============================================================================
+% PAGE DE GARDE
+% =============================================================================
 
-\begin{document}
 \begin{titlepage}
     \centering
     {\small République Algérienne Démocratique et Populaire}\\
@@ -40,49 +30,48 @@
         \end{flushright}
     \end{minipage}\hfill\\
     \vspace{20mm}
-    {\large \bfseries Mémoire de fin d’études}\\[0.5cm]
+
+    {\large \bfseries Mémoire de fin d'études}\\[0.5cm]
     {\large Pour l'obtention du diplôme d'Ingénieur d'État en Informatique}\\[0.5cm]
-    {\large \bfseries{Option : Systèmes Informatiques et Logiciels} \\ }
+    {\large \bfseries \documentOption \\ }
     \vspace{10mm}
 
     % Title
     \rule{\linewidth}{0.3mm} \\[0.4cm]
-    { \huge \bfseries Conception et réalisation d'un système d'optimisation des itinéraires pour les animateurs de zone de Djezzy\\[0.4cm] }
+    { \huge \bfseries \documentTitle\\[0.4cm] }
     \rule{\linewidth}{0.3mm} \\[1cm]
     \vspace{10mm}
 
-    % Author and supervisor
+    % Author and supervisors
     \noindent
     \begin{minipage}{0.5\textwidth}
         \vspace{-7mm}
         \begin{flushleft} \large
             \emph{Réalisé par :}\\
-            M. \textsc{Guerras} Mohamed Amine \\
+            \documentAuthor \\
         \end{flushleft}
     \end{minipage}
     \begin{minipage}{0.4\textwidth}
         \begin{flushright} \large
             \begin{flushleft} \large
                 \emph{Encadré par :} \\
-                Mme. \textsc{Hamdad} Leila  (ESI)\\[0.1cm]
-                M. \textsc{Kisma} Ahmed  (Djezzy)\\
+                \supervisorESI  (ESI)\\[0.1cm]
+                \supervisorCompany  (\companyName)\\
             \end{flushleft}
-
         \end{flushright}
     \end{minipage}\\[1cm]
 
-    {\large \textit{Soutenu le 20 Septembre 2020, Devant le jury composé de : }}\\[0.5cm]
+    {\large \textit{Soutenu le \defenseDate, Devant le jury composé de : }}\\[0.5cm]
 
     \centering
     \begin{tabular}{lll}
-        \large Mme. Soumia \textsc{Benkrid} : & \large ESI & \large - Présidente  \\[0.1cm]
-        \large Mme. Salima \textsc{Imloul} :  & \large ESI & \large - Examinateur \\[0.1cm]
-        \large M. Abdelkader \textsc{Ameur} : & \large ESI & \large - Rapporteur
+        \large \juryPresident : & \large ESI & \large - Président   \\[0.1cm]
+        \large \juryExaminer :  & \large ESI & \large - Examinateur \\[0.1cm]
+        \large \juryReporter :  & \large ESI & \large - Rapporteur
     \end{tabular}
 
     \vspace{20mm}
     % Bottom of the page
-    {\large Promotion : 2019/2020}
+    {\large Promotion : \academicYear}
 
 \end{titlepage}
-\end{document}
