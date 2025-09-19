@@ -46,31 +46,31 @@
     \renewcommand{\headrulewidth}{0pt}
 }
 
-% Table settings
+% French names for tables and figures
 \renewcommand{\tablename}{Tableau}
 \renewcommand{\figurename}{Figure}
-\renewcommand{\listalgorithmcfname}{Liste des algorithmes}
 \renewcommand{\contentsname}{Table des matières}
 \renewcommand{\listfigurename}{Liste des figures}
 \renewcommand{\listtablename}{Liste des tableaux}
 
-% Algorithm settings
+% Algorithm settings in French
 \DontPrintSemicolon
 \SetKwInput{KwInput}{Entrée}
 \SetKwInput{KwOutput}{Sortie}
+\SetKwFor{For}{pour}{faire}{fin pour}
+\SetKwIF{If}{ElseIf}{Else}{si}{alors}{sinon si}{sinon}{fin si}
+\SetKwWhile{While}{tant que}{faire}{fin tant que}
+\renewcommand{\listalgorithmcfname}{Liste des algorithmes}
 
 % Bibliography settings
-\bibliographystyle{apalike}
-\renewcommand{\bibname}{Bibliographie}
+\bibliographystyle{plain}
 
-% Appendix settings
-\addto\captionsfrench{
-    \renewcommand\appendixname{Annexe}
-    \renewcommand\appendixpagename{Annexes}
-    \renewcommand\appendixtocname{Annexes}
-}
+% Appendix settings in French
+\renewcommand\appendixname{Annexe}
+\renewcommand\appendixpagename{Annexes}
+\renewcommand\appendixtocname{Annexes}
 
-% Theorem environments
+% Theorem environments in French
 \theoremstyle{definition}
 \newtheorem{definition}{Définition}[chapter]
 \newtheorem{example}{Exemple}[chapter]
@@ -83,7 +83,7 @@
 \newtheorem{remark}{Remarque}[chapter]
 \newtheorem{note}{Note}[chapter]
 
-% Listings settings (if using code)
+% Listings settings (code formatting)
 \lstset{
     basicstyle=\footnotesize\ttfamily,
     breaklines=true,
@@ -92,5 +92,6 @@
     numbers=left,
     numberstyle=\tiny,
     showstringspaces=false,
-    tabsize=2
+    tabsize=2,
+    title=\lstname
 }

@@ -25,7 +25,7 @@
 % =============================================================================
 % PAGES PRÉLIMINAIRES
 % =============================================================================
-\frontmatter
+\pagenumbering{roman}
 
 % Page de garde
 \input{frontmatter/titlepage}
@@ -48,7 +48,8 @@
 % =============================================================================
 % CORPS PRINCIPAL
 % =============================================================================
-\mainmatter
+\pagenumbering{arabic}
+\setcounter{page}{1}
 
 % Introduction générale
 \input{chapters/00-introduction}
@@ -77,7 +78,6 @@
 % =============================================================================
 % MATIÈRES FINALES
 % =============================================================================
-\backmatter
 
 % Bibliographie
 \input{backmatter/bibliography}

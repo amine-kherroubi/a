@@ -2,16 +2,10 @@
 % PACKAGES CONFIGURATION
 % =============================================================================
 
-% Encoding and fonts
+% Encoding and language
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{fontspec}
-
-% Language support
-\usepackage{polyglossia}
-\setmainlanguage{french}
-\setotherlanguage{arabic}
-\newfontfamily\arabicfont[Script=Arabic,Scale=1.1]{Arial Unicode MS}
+\usepackage[french]{babel}
 
 % Page layout and geometry
 \usepackage[top=2.5cm,bottom=2.5cm,right=2.5cm,left=2.5cm]{geometry}
@@ -66,3 +60,8 @@
 \usepackage{xspace}
 \usepackage{microtype}
 \usepackage{csquotes}
+
+% Arabic support for title page only
+\usepackage{arabtex}
+\usepackage[utf8]{inputenc}
+\setcode{utf8}
