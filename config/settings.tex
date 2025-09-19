@@ -1,97 +1,42 @@
-% =============================================================================
-% GENERAL SETTINGS AND CONFIGURATIONS
-% =============================================================================
-
-% Document formatting
 \setlength{\parskip}{6pt}
 \setlength{\parindent}{0pt}
 \renewcommand{\baselinestretch}{1.15}
 \setcounter{tocdepth}{2}
 \setcounter{secnumdepth}{3}
 
-% Graphics path
-\graphicspath{{images/}{figures/}}
+\graphicspath{{images/}}
 
-% Color definitions
 \definecolor{ESIBlue}{RGB}{0,84,159}
-\definecolor{ESIGray}{RGB}{128,128,128}
-\definecolor{LightGray}{RGB}{245,245,245}
-\definecolor{DarkGray}{RGB}{64,64,64}
 
-% Hyperref setup
 \hypersetup{
     colorlinks=true,
     linkcolor=black,
     citecolor=ESIBlue,
     urlcolor=ESIBlue,
-    filecolor=ESIBlue,
-    pdfborder={0 0 0},
-    bookmarksnumbered=true,
-    bookmarksopen=true
+    pdfborder={0 0 0}
 }
 
-% Headers and footers
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\nouppercase{\leftmark}}
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0.5pt}
-\renewcommand{\footrulewidth}{0pt}
 \setlength{\headheight}{14.5pt}
 
-% Plain page style for chapter beginnings
 \fancypagestyle{plain}{
     \fancyhf{}
     \fancyfoot[C]{\thepage}
     \renewcommand{\headrulewidth}{0pt}
 }
 
-% French names for tables and figures
 \renewcommand{\tablename}{Tableau}
 \renewcommand{\figurename}{Figure}
 \renewcommand{\contentsname}{Table des matières}
 \renewcommand{\listfigurename}{Liste des figures}
 \renewcommand{\listtablename}{Liste des tableaux}
 
-% Algorithm settings in French
-\DontPrintSemicolon
-\SetKwInput{KwInput}{Entrée}
-\SetKwInput{KwOutput}{Sortie}
-\SetKwFor{For}{pour}{faire}{fin pour}
-\SetKwIF{If}{ElseIf}{Else}{si}{alors}{sinon si}{sinon}{fin si}
-\SetKwWhile{While}{tant que}{faire}{fin tant que}
-\renewcommand{\listalgorithmcfname}{Liste des algorithmes}
-
-% Bibliography settings
 \bibliographystyle{plain}
 
-% Appendix settings in French
 \renewcommand\appendixname{Annexe}
 \renewcommand\appendixpagename{Annexes}
 \renewcommand\appendixtocname{Annexes}
-
-% Theorem environments in French
-\theoremstyle{definition}
-\newtheorem{definition}{Définition}[chapter]
-\newtheorem{example}{Exemple}[chapter]
-
-\theoremstyle{plain}
-\newtheorem{theorem}{Théorème}[chapter]
-\newtheorem{proposition}{Proposition}[chapter]
-
-\theoremstyle{remark}
-\newtheorem{remark}{Remarque}[chapter]
-\newtheorem{note}{Note}[chapter]
-
-% Listings settings (code formatting)
-\lstset{
-    basicstyle=\footnotesize\ttfamily,
-    breaklines=true,
-    captionpos=b,
-    frame=single,
-    numbers=left,
-    numberstyle=\tiny,
-    showstringspaces=false,
-    tabsize=2,
-    title=\lstname
-}

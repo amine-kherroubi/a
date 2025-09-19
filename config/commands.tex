@@ -1,87 +1,9 @@
-% =============================================================================
-% CUSTOM COMMANDS AND ENVIRONMENTS
-% =============================================================================
-
-% Custom chapter command for unnumbered chapters in TOC
 \newcommand{\mychapter}[1]{
     \chapter*{#1}
     \addcontentsline{toc}{chapter}{#1}
     \markboth{#1}{#1}
 }
 
-% Blank page command
-\newcommand\blankpage{%
-    \null
-    \thispagestyle{empty}%
-    \addtocounter{page}{-1}%
-    \newpage
-}
-
-% Custom quote environment
-\newcommand{\customquote}[2]{
-    \begin{displayquote}
-        \itshape #1
-        \begin{flushright}
-            --- #2
-        \end{flushright}
-    \end{displayquote}
-}
-
-% Convenient shortcuts
-\newcommand{\eg}{\emph{e.g.}\xspace}
-\newcommand{\ie}{\emph{i.e.}\xspace}
-\newcommand{\etc}{\emph{etc.}\xspace}
-
-% Figure and table referencing (removed \eqref as it's already defined by amsmath)
 \newcommand{\figref}[1]{Figure~\ref{#1}}
 \newcommand{\tabref}[1]{Tableau~\ref{#1}}
-\newcommand{\chapref}[1]{Chapitre~\ref{#1}}
-\newcommand{\secref}[1]{Section~\ref{#1}}
-
-% Code highlighting (inline)
 \newcommand{\code}[1]{\texttt{#1}}
-
-% Emphasis commands
-\newcommand{\important}[1]{\textbf{#1}}
-\newcommand{\keyword}[1]{\textbf{\color{ESIBlue}#1}}
-
-% Custom itemize with custom bullet
-\newenvironment{customitemize}
-{\begin{itemize}[label=\textcolor{ESIBlue}{$\bullet$}]}
-        {\end{itemize}}
-
-% Custom enumerate
-\newenvironment{customenumerate}
-{\begin{enumerate}[label=\textcolor{ESIBlue}{\arabic*.}]}
-        {\end{enumerate}}
-
-% Warning box
-\newcommand{\warningbox}[1]{
-    \begin{center}
-        \colorbox{yellow!20}{
-            \begin{minipage}{0.9\textwidth}
-                \textbf{Attention :} #1
-            \end{minipage}
-        }
-    \end{center}
-}
-
-% Info box
-\newcommand{\infobox}[1]{
-    \begin{center}
-        \colorbox{blue!10}{
-            \begin{minipage}{0.9\textwidth}
-                \textbf{Information :} #1
-            \end{minipage}
-        }
-    \end{center}
-}
-
-% Clean double page
-\makeatletter
-\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else%
-            \hbox{}%
-            \thispagestyle{empty}%
-            \newpage%
-            \if@twocolumn\hbox{}\newpage\fi\fi\fi}
-\makeatother

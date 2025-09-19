@@ -1,88 +1,34 @@
-% =============================================================================
-% MÉMOIRE DE FIN D'ÉTUDES - ESI
-% Fichier principal - main.tex
-% =============================================================================
-
 \documentclass[a4paper,12pt,oneside]{report}
 
-% =============================================================================
-% CHARGEMENT DES PACKAGES ET CONFIGURATION
-% =============================================================================
 \input{config/packages}
 \input{config/settings}
 \input{config/commands}
-
-% =============================================================================
-% MÉTADONNÉES DU DOCUMENT
-% =============================================================================
 \input{config/metadata}
 
-% =============================================================================
-% DÉBUT DU DOCUMENT
-% =============================================================================
 \begin{document}
 
-% =============================================================================
-% PAGES PRÉLIMINAIRES
-% =============================================================================
 \pagenumbering{roman}
 
-% Page de garde
 \input{frontmatter/titlepage}
-
-% Dédicace
 \input{frontmatter/dedication}
-
-% Remerciements
 \input{frontmatter/acknowledgments}
-
-% Résumés
 \input{frontmatter/abstracts}
-
-% Tables des matières
 \input{frontmatter/tableofcontents}
-
-% Liste des acronymes
 \input{frontmatter/acronyms}
 
-% =============================================================================
-% CORPS PRINCIPAL
-% =============================================================================
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
-% Introduction générale
 \input{chapters/00-introduction}
-
-% Chapitre 1 : Présentation de l'organisme
 \input{chapters/01-presentation}
-
-% Chapitre 2 : Étude de l'existant
 \input{chapters/02-study}
-
-% Chapitre 3 : Analyse des besoins
 \input{chapters/03-needs}
-
-% Chapitre 4 : Analyse et conception
 \input{chapters/04-design}
-
-% Chapitre 5 : Développement et réalisation
 \input{chapters/05-development}
-
-% Chapitre 6 : Résultats et évaluation
 \input{chapters/06-results}
-
-% Conclusion générale
 \input{chapters/07-conclusion}
 
-% =============================================================================
-% MATIÈRES FINALES
-% =============================================================================
-
-% Bibliographie
 \input{backmatter/bibliography}
-
-% Annexes
 \input{backmatter/appendices}
 
 \end{document}
