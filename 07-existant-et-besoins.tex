@@ -1,0 +1,267 @@
+\chapter{Étude de l'existant et analyse des besoins}
+\clearpage
+\label{chap:existant-besoins}
+
+\section{Introduction}
+
+Ce chapitre présente l'analyse approfondie du processus actuel de génération des bilans mensuels relatifs aux aides au logement rural au sein de la BNH. Cette étude permet d'identifier les problématiques existantes, les besoins des utilisateurs, et de définir les spécifications fonctionnelles et techniques du système cible. La démarche adoptée combine observation directe, entretiens avec les utilisateurs métier, et analyse documentaire des procédures en place.
+
+\section{Processus actuel de génération des bilans mensuels}
+
+\subsection{Vue d'ensemble du processus existant}
+
+Actuellement, la production des bilans mensuels relatifs aux aides au logement rural suit un processus largement manuel, impliquant plusieurs acteurs et systèmes. Le processus global peut être décomposé en plusieurs étapes principales :
+
+\medskip
+
+\textbf{Collecte des données sources :} Les données sont extraites manuellement depuis différentes bases de données opérationnelles (système de gestion des dossiers, base comptable, registres des engagements).
+
+\textbf{Traitement et consolidation :} Les données collectées sont traitées dans des fichiers Excel séparés par type d'aide et par région, puis consolidées manuellement.
+
+\textbf{Calculs et agrégations :} Les indicateurs statistiques et financiers sont calculés manuellement ou via des formules Excel, avec des risques d'erreurs dans les formules.
+
+\textbf{Mise en forme et validation :} Les bilans sont mis en forme selon les templates existants, puis validés par la hiérarchie avant diffusion.
+
+\textbf{Distribution :} Les bilans finalisés sont distribués aux différents destinataires (direction générale, ministère de tutelle, directions régionales).
+
+\subsection{Acteurs impliqués}
+
+Le processus actuel mobilise plusieurs catégories d'acteurs avec des rôles et responsabilités spécifiques :
+
+\begin{itemize}
+    \item \textbf{Chargés d'études :} Extraction et traitement initial des données
+    \item \textbf{Contrôleurs de gestion :} Validation des calculs et cohérence des données
+    \item \textbf{Responsables métier :} Analyse et interprétation des résultats
+    \item \textbf{Direction :} Validation finale et diffusion officielle
+    \item \textbf{Support informatique :} Assistance ponctuelle pour les extractions de données
+\end{itemize}
+
+\subsection{Outils et systèmes utilisés}
+
+L'environnement technologique actuel se compose de plusieurs outils hétérogènes :
+
+\medskip
+
+\textbf{Système de gestion des dossiers (SGD) :} Application Oracle Forms développée en interne, centralisant les informations sur les dossiers de demande d'aide au logement rural.
+
+\textbf{Module comptable :} Système comptable intégré gérant les engagements, mandatements, et paiements effectifs.
+
+\textbf{Base de données géographique :} Référentiel des zones rurales éligibles et de leurs caractéristiques démographiques.
+
+\textbf{Outils bureautiques :} Suite Microsoft Office, principalement Excel pour les traitements statistiques et Word pour la rédaction des bilans.
+
+\textbf{Messagerie institutionnelle :} Système de messagerie interne pour les échanges et validations.
+
+\section{Identification des problématiques et limites}
+
+\subsection{Problèmes liés à la qualité des données}
+
+L'analyse du processus existant révèle plusieurs problématiques récurrentes concernant la qualité des données :
+
+\medskip
+
+\textbf{Incohérences entre sources :} Les différentes bases de données ne sont pas toujours synchronisées, entraînant des écarts dans les informations extraites selon la source consultée.
+
+\textbf{Données incomplètes :} Certains champs essentiels ne sont pas systématiquement renseignés lors de la saisie, créant des lacunes dans les analyses statistiques.
+
+\textbf{Erreurs de saisie :} L'absence de contrôles automatisés lors de la saisie génère des erreurs qui se propagent dans les bilans finaux.
+
+\textbf{Doublons :} Des dossiers peuvent être enregistrés plusieurs fois dans le système, faussant les statistiques de bénéficiaires.
+
+\subsection{Problèmes de délais et d'efficacité}
+
+Le processus manuel actuel présente des limitations importantes en termes de délais :
+
+\medskip
+
+\textbf{Temps de production élevé :} La génération d'un bilan mensuel complet nécessite entre 15 et 20 jours de travail, mobilisant plusieurs personnes.
+
+\textbf{Goulots d'étranglement :} Certaines étapes du processus dépendent d'une seule personne, créant des points de blocage en cas d'absence.
+
+\textbf{Redondance des tâches :} De nombreuses opérations sont répétées à chaque cycle, sans capitalisation sur les traitements précédents.
+
+\textbf{Validation séquentielle :} Le processus de validation linéaire allonge les délais sans possibilité de parallélisation des tâches.
+
+\subsection{Problèmes de traçabilité et d'audit}
+
+Le processus actuel présente des lacunes en matière de traçabilité :
+
+\medskip
+
+\textbf{Absence de versioning :} Les différentes versions des bilans ne sont pas systématiquement archivées avec leurs métadonnées.
+
+\textbf{Traçabilité limitée des modifications :} Les corrections apportées aux données ne sont pas toujours documentées et tracées.
+
+\textbf{Difficulté de reconstitution :} Il est complexe de reconstituer l'origine d'une donnée particulière dans un bilan final.
+
+\textbf{Contrôles insuffisants :} L'absence d'automatisation limite les possibilités de contrôles de cohérence systématiques.
+
+\subsection{Risques opérationnels}
+
+Plusieurs risques opérationnels sont identifiés dans le processus existant :
+
+\medskip
+
+\textbf{Risque d'erreur humaine :} Les manipulations manuelles multiples augmentent la probabilité d'erreurs dans les calculs et consolidations.
+
+\textbf{Dépendance aux personnes :} La connaissance du processus est concentrée sur quelques personnes clés, créant un risque de perte de savoir-faire.
+
+\textbf{Absence de sauvegarde centralisée :} Les fichiers de travail sont stockés localement sans synchronisation centralisée.
+
+\textbf{Sécurité des données :} Les échanges par email et stockage sur postes individuels présentent des risques de sécurité.
+
+\section{Expression des besoins fonctionnels}
+
+\subsection{Besoins de collecte et intégration des données}
+
+Les utilisateurs expriment des besoins spécifiques concernant la collecte automatisée des données :
+
+\medskip
+
+\textbf{Intégration multi-sources :} Le système doit pouvoir extraire automatiquement les données depuis les différentes bases existantes (SGD, comptabilité, référentiels).
+
+\textbf{Contrôles de cohérence :} Mise en place de règles de validation automatique pour détecter les incohérences entre sources.
+
+\textbf{Gestion des données manquantes :} Identification automatique des données incomplètes avec génération d'alertes.
+
+\textbf{Historisation :} Conservation de l'historique des extractions pour permettre les comparaisons temporelles.
+
+\subsection{Besoins de traitement et calcul}
+
+Les besoins de traitement automatisé incluent :
+
+\medskip
+
+\textbf{Calculs automatisés :} Automatisation de tous les calculs statistiques et financiers actuellement réalisés manuellement.
+
+\textbf{Agrégations multiples :} Possibilité de générer des synthèses par région, type d'aide, période, et selon différents critères de segmentation.
+
+\textbf{Indicateurs personnalisables :} Flexibilité pour définir de nouveaux indicateurs selon les besoins évolutifs des utilisateurs.
+
+\textbf{Comparaisons temporelles :} Génération automatique d'analyses comparatives sur plusieurs périodes.
+
+\subsection{Besoins de génération et présentation}
+
+Les utilisateurs souhaitent des fonctionnalités avancées de génération de bilans :
+
+\medskip
+
+\textbf{Templates personnalisables :} Possibilité de définir différents modèles de bilans selon les destinataires et objectifs.
+
+\textbf{Formats multiples :} Export possible en PDF, Excel, Word selon les besoins de diffusion.
+
+\textbf{Graphiques intégrés :} Génération automatique de graphiques et tableaux de bord visuels.
+
+\textbf{Planification automatique :} Possibilité de programmer la génération périodique des bilans.
+
+\section{Spécifications techniques du système cible}
+
+\subsection{Architecture technique requise}
+
+Le système cible doit respecter plusieurs contraintes architecturales :
+
+\medskip
+
+\textbf{Intégration avec l'existant :} Compatible avec l'infrastructure Oracle et les systèmes Java EE existants.
+
+\textbf{Architecture web :} Application accessible via navigateur web pour faciliter la maintenance et les évolutions.
+
+\textbf{Sécurité renforcée :} Authentification forte, chiffrement des échanges, et gestion granulaire des droits d'accès.
+
+\textbf{Performances optimisées :} Capacité à traiter de gros volumes de données dans des délais acceptables (génération complète < 10 minutes).
+
+\subsection{Contraintes de sécurité et conformité}
+
+Le système doit répondre aux exigences de sécurité bancaire :
+
+\medskip
+
+\textbf{Authentification et autorisation :} Intégration avec l'Active Directory existant et gestion des rôles métier.
+
+\textbf{Audit trail complet :} Traçabilité de toutes les opérations avec horodatage et identification des utilisateurs.
+
+\textbf{Chiffrement des données :} Protection des données sensibles en base et lors des échanges.
+
+\textbf{Sauvegarde et récupération :} Procédures automatisées de sauvegarde avec possibilité de restauration rapide.
+
+\subsection{Exigences de performance et disponibilité}
+
+Les performances attendues du système incluent :
+
+\medskip
+
+\textbf{Temps de réponse :} Génération d'un bilan mensuel complet en moins de 10 minutes.
+
+\textbf{Disponibilité :} Système accessible 24h/24 avec une disponibilité cible de 99,5\%.
+
+\textbf{Montée en charge :} Capacité à supporter une utilisation simultanée par 20 utilisateurs.
+
+\textbf{Évolutivité :} Architecture permettant l'ajout de nouvelles fonctionnalités sans refonte majeure.
+
+\section{Contraintes réglementaires et métier}
+
+\subsection{Conformité réglementaire}
+
+Le système doit respecter le cadre réglementaire applicable :
+
+\medskip
+
+\textbf{Réglementation bancaire :} Conformité aux instructions de la Banque d'Algérie sur les systèmes d'information bancaires.
+
+\textbf{Comptabilité publique :} Respect des règles comptables applicables aux établissements publics.
+
+\textbf{Protection des données :} Application des principes de protection des données personnelles des bénéficiaires.
+
+\textbf{Archivage légal :} Conservation des documents selon les durées légales requises.
+
+\subsection{Contraintes métier spécifiques}
+
+Plusieurs contraintes métier doivent être prises en compte :
+
+\medskip
+
+\textbf{Saisonnalité des programmes :} Gestion des cycles budgétaires annuels et des pics d'activité saisonniers.
+
+\textbf{Spécificités régionales :} Prise en compte des différences dans l'application des programmes selon les wilayas.
+
+\textbf{Évolution des dispositifs :} Flexibilité pour intégrer les modifications réglementaires des programmes d'aide.
+
+\textbf{Multilingual :} Support des langues française et arabe pour l'interface utilisateur.
+
+\section{Définition des profils utilisateurs}
+
+\subsection{Administrateur système}
+
+\textbf{Profil :} Personnel informatique de la DSI
+\textbf{Responsabilités :} Configuration système, gestion des utilisateurs, maintenance technique
+\textbf{Besoins spécifiques :} Interfaces d'administration, logs détaillés, outils de diagnostic
+
+\subsection{Responsable reporting}
+
+\textbf{Profil :} Cadre de la direction du contrôle de gestion
+\textbf{Responsabilités :} Validation des bilans, définition des nouveaux indicateurs
+\textbf{Besoins spécifiques :} Outils de paramétrage, tableaux de bord de supervision
+
+\subsection{Chargé d'études}
+
+\textbf{Profil :} Personnel d'exécution spécialisé dans l'analyse statistique
+\textbf{Responsabilités :} Génération des bilans courants, contrôles de premier niveau
+\textbf{Besoins spécifiques :} Interface simple, automatisation maximale, outils de contrôle
+
+\subsection{Utilisateur consultation}
+
+\textbf{Profil :} Cadres et responsables métier
+\textbf{Responsabilités :} Consultation des bilans, analyse des résultats
+\textbf{Besoins spécifiques :} Accès en lecture seule, exports facilités, visualisations graphiques
+
+\section{Conclusion}
+
+Cette analyse détaillée du processus existant et des besoins utilisateurs met en évidence la nécessité d'une refonte complète de la chaîne de production des bilans mensuels. Les problématiques identifiées justifient pleinement l'investissement dans un outil d'automatisation moderne, capable de répondre aux exigences de qualité, de délais et de traçabilité.
+
+\medskip
+
+Les spécifications fonctionnelles et techniques définies dans ce chapitre constituent le cahier des charges de référence pour la phase de conception. Elles intègrent les contraintes techniques de l'environnement BNH tout en répondant aux besoins opérationnels exprimés par les utilisateurs.
+
+\medskip
+
+Le chapitre suivant présente la démarche de conception adoptée pour développer une solution technique répondant à ces spécifications, en s'appuyant sur les meilleures pratiques de l'ingénierie logicielle et les technologies adaptées à l'environnement de la BNH.

@@ -1,0 +1,483 @@
+\chapter{Glossaire et définitions}
+\label{app:glossaire}
+
+\section{Termes métier bancaire}
+
+\subsection{Aide au logement rural}
+Dispositif gouvernemental de soutien financier à la construction, réhabilitation ou amélioration de logements en zones rurales, géré par la BNH dans le cadre de sa mission de service public.
+
+\subsection{AAPL (Aide à l'Accession à la Propriété du Logement)}
+Programme de soutien gouvernemental facilitant l'accès à la propriété immobilière pour les ménages à revenus modestes et intermédiaires.
+
+\subsection{BNH (Banque Nationale de l'Habitat)}
+Établissement public à caractère économique et commercial, anciennement Caisse Nationale du Logement (CNL), spécialisé dans le financement de l'habitat en Algérie.
+
+\subsection{CNL (Caisse Nationale du Logement)}
+Ancien nom de la Banque Nationale de l'Habitat, avant sa transformation en 2018.
+
+\subsection{Engagement budgétaire}
+Acte par lequel un organisme public s'oblige financièrement envers un tiers dans la limite des crédits ouverts et des autorisations budgétaires.
+
+\subsection{Mandatement}
+Ordre de paiement émis par l'ordonnateur au comptable public pour effectuer le règlement d'une dépense préalablement engagée et liquidée.
+
+\subsection{SGD (Système de Gestion des Dossiers)}
+Application informatique centralisant la gestion des dossiers de demande d'aide au logement, développée sur technologie Oracle Forms.
+
+\section{Termes techniques informatiques}
+
+\subsection{API REST (Representational State Transfer)}
+Architecture de services web utilisant les protocoles HTTP standard pour permettre la communication entre applications via des requêtes standardisées.
+
+\subsection{DAO (Data Access Object)}
+Pattern de conception permettant d'abstraire l'accès aux données en encapsulant les opérations CRUD dans des objets dédiés.
+
+\subsection{ETL (Extract, Transform, Load)}
+Processus d'intégration de données consistant à extraire des données de sources multiples, les transformer selon les règles métier, puis les charger dans un système cible.
+
+\subsection{JasperReports}
+Moteur open source de génération de rapports pour applications Java, permettant la création de documents PDF, Excel, HTML à partir de templates XML.
+
+\subsection{JDBC (Java Database Connectivity)}
+API Java standard permettant la connexion et l'exécution de requêtes sur des bases de données relationnelles.
+
+\subsection{LDAP (Lightweight Directory Access Protocol)}
+Protocole réseau pour accéder à un service d'annuaire distribué, utilisé notamment pour l'authentification centralisée des utilisateurs.
+
+\subsection{Maven}
+Outil de gestion de projet Java automatisant la compilation, les tests, la gestion des dépendances et le packaging des applications.
+
+\subsection{ORM (Object-Relational Mapping)}
+Technique de programmation permettant de faire correspondre les objets d'un langage orienté objet avec les tables d'une base de données relationnelle.
+
+\subsection{Spring Framework}
+Framework Java open source facilitant le développement d'applications enterprise via l'inversion de contrôle et la programmation orientée aspect.
+
+\section{Indicateurs et métriques}
+
+\subsection{KPI (Key Performance Indicator)}
+Indicateur clé de performance permettant de mesurer l'efficacité d'une organisation ou d'un processus par rapport à ses objectifs.
+
+\subsection{ROI (Return On Investment)}
+Ratio financier mesurant la rentabilité d'un investissement en comparant les bénéfices obtenus au coût de l'investissement initial.
+
+\subsection{SLA (Service Level Agreement)}
+Accord contractuel définissant le niveau de service attendu entre un prestataire et son client, incluant des métriques de performance et de disponibilité.
+
+\subsection{Taux d'adoption}
+Pourcentage d'utilisateurs potentiels ayant effectivement adopté et utilisé régulièrement une solution technologique mise à leur disposition.
+
+\section{Méthodologies et frameworks}
+
+\subsection{Agile}
+Ensemble de méthodes de développement logiciel privilégiant la collaboration, l'adaptation au changement et la livraison incrémentale de valeur.
+
+\subsection{DevOps}
+Culture et ensemble de pratiques visant à raccourcir le cycle de développement logiciel tout en assurant la qualité et la fiabilité des livraisons.
+
+\subsection{MVC (Model-View-Controller)}
+Pattern architectural séparant les données (Model), la présentation (View) et la logique de contrôle (Controller) d'une application.
+
+\subsection{Scrum}
+Framework agile pour la gestion de projet, organisant le travail en sprints avec des rôles définis (Product Owner, Scrum Master, équipe de développement).
+
+\subsection{UML (Unified Modeling Language)}
+Langage de modélisation graphique standardisé utilisé pour spécifier, visualiser et documenter les systèmes logiciels orientés objet.
+
+\chapter{Documentation technique}
+\label{app:documentation}
+
+\section{Architecture système}
+
+\subsection{Schéma d'architecture global}
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=15cm]{architecture_detaillee.png}
+    \caption{Architecture détaillée du système d'automatisation.}
+    \label{fig:architecture-detaillee}
+\end{figure}
+
+L'architecture système s'organise autour de cinq couches principales :
+
+\begin{itemize}
+    \item \textbf{Couche Présentation} : Interfaces web HTML5/CSS3/JavaScript
+    \item \textbf{Couche Application} : Services Spring Boot et contrôleurs REST
+    \item \textbf{Couche Métier} : Logique applicative et moteur de calcul
+    \item \textbf{Couche Persistance} : Accès aux données via Hibernate/JPA
+    \item \textbf{Couche Données} : Bases Oracle existantes et nouveau schéma applicatif
+\end{itemize}
+
+\subsection{Matrice de traçabilité des exigences}
+
+\begin{longtable}{|p{1cm}|p{6cm}|p{3cm}|p{3cm}|p{2cm}|}
+    \hline
+    \textbf{ID} & \textbf{Exigence}                      & \textbf{Composant}         & \textbf{Status} & \textbf{Tests} \\ \hline
+    EX-001      & Extraction automatique des données SGD & DataExtractionService      & Implémenté      & OK             \\ \hline
+    EX-002      & Calcul automatisé des indicateurs      & IndicatorCalculationEngine & Implémenté      & OK             \\ \hline
+    EX-003      & Génération de bilans PDF               & ReportGeneratorService     & Implémenté      & OK             \\ \hline
+    EX-004      & Interface web responsive               & Frontend HTML5/CSS3        & Implémenté      & OK             \\ \hline
+    EX-005      & Authentification LDAP                  & SecurityModule             & Implémenté      & OK             \\ \hline
+    EX-006      & Gestion des droits d'accès             & AuthorizationService       & Implémenté      & OK             \\ \hline
+    EX-007      & Historisation des bilans               & BilansHistoryService       & Implémenté      & OK             \\ \hline
+    EX-008      & Export multi-formats                   & ExportService              & Implémenté      & OK             \\ \hline
+    EX-009      & Tableau de bord graphiques             & DashboardService           & Implémenté      & OK             \\ \hline
+    EX-010      & Monitoring système                     & MonitoringModule           & Implémenté      & OK             \\ \hline
+    \caption{Matrice de traçabilité des exigences fonctionnelles.}
+    \label{tab:traçabilite-exigences}
+\end{longtable}
+
+\section{Configuration et déploiement}
+
+\subsection{Configuration Spring Boot}
+
+\textbf{Fichier application.yml (Production) :}
+\begin{verbatim}
+server:
+  port: 8080
+  servlet:
+    context-path: /bnh-bilans
+    
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@//oracle-prod:1521/BNHPROD
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+      
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+    
+  security:
+    ldap:
+      urls: ldap://ad-server:389
+      base: dc=bnh,dc=dz
+      
+logging:
+  level:
+    com.bnh.bilans: INFO
+    org.springframework.security: DEBUG
+  file:
+    name: /var/log/bnh-bilans/application.log
+    max-size: 10MB
+    max-history: 30
+
+app:
+  reporting:
+    output-directory: /data/bilans/output
+    templates-directory: /data/bilans/templates
+  extraction:
+    batch-size: 1000
+    max-retry-attempts: 3
+\end{verbatim}
+
+\subsection{Scripts de déploiement}
+
+\textbf{Script de déploiement automatisé (deploy.sh) :}
+\begin{verbatim}
+#!/bin/bash
+
+# Configuration
+APP_NAME="bnh-bilans"
+APP_VERSION="1.0.0"
+TOMCAT_HOME="/opt/tomcat"
+BACKUP_DIR="/backup/webapps"
+LOG_FILE="/var/log/deploy.log"
+
+echo "=== Début déploiement $APP_NAME v$APP_VERSION ===" >> $LOG_FILE
+
+# Arrêt Tomcat
+echo "Arrêt de Tomcat..." >> $LOG_FILE
+sudo systemctl stop tomcat
+
+# Sauvegarde ancienne version
+if [ -d "$TOMCAT_HOME/webapps/$APP_NAME" ]; then
+    echo "Sauvegarde ancienne version..." >> $LOG_FILE
+    sudo mv "$TOMCAT_HOME/webapps/$APP_NAME" "$BACKUP_DIR/$APP_NAME-$(date +%Y%m%d_%H%M%S)"
+fi
+
+# Déploiement nouvelle version
+echo "Déploiement nouvelle version..." >> $LOG_FILE
+sudo cp target/$APP_NAME-$APP_VERSION.war $TOMCAT_HOME/webapps/$APP_NAME.war
+
+# Configuration permissions
+sudo chown tomcat:tomcat $TOMCAT_HOME/webapps/$APP_NAME.war
+
+# Démarrage Tomcat
+echo "Démarrage de Tomcat..." >> $LOG_FILE
+sudo systemctl start tomcat
+
+# Vérification déploiement
+sleep 30
+if curl -f -s "http://localhost:8080/$APP_NAME/actuator/health" > /dev/null; then
+    echo "Déploiement réussi" >> $LOG_FILE
+    exit 0
+else
+    echo "Échec du déploiement" >> $LOG_FILE
+    exit 1
+fi
+\end{verbatim}
+
+\section{Guide d'utilisation}
+
+\subsection{Procédure de génération de bilan}
+
+\textbf{Étape 1 : Connexion et authentification}
+\begin{enumerate}
+    \item Accéder à l'URL : http://bnh-server:8080/bnh-bilans
+    \item Saisir identifiants Active Directory
+    \item Vérifier les droits d'accès affichés
+\end{enumerate}
+
+\textbf{Étape 2 : Paramétrage du bilan}
+\begin{enumerate}
+    \item Cliquer sur "Génération de bilans"
+    \item Sélectionner la période (mois/année)
+    \item Choisir le type de bilan souhaité
+    \item Définir les critères de filtrage (région, type d'aide)
+    \item Valider les paramètres
+\end{enumerate}
+
+\textbf{Étape 3 : Lancement de la génération}
+\begin{enumerate}
+    \item Vérifier l'aperçu des données sélectionnées
+    \item Choisir le format de sortie (PDF, Excel, CSV)
+    \item Cliquer sur "Générer le bilan"
+    \item Suivre la progression via la barre de statut
+\end{enumerate}
+
+\textbf{Étape 4 : Récupération du résultat}
+\begin{enumerate}
+    \item Notification automatique de fin de traitement
+    \item Téléchargement du fichier généré
+    \item Archivage automatique dans l'historique
+    \item Possibilité de partage sécurisé
+\end{enumerate}
+
+\subsection{Procédure de maintenance}
+
+\textbf{Maintenance quotidienne :}
+\begin{itemize}
+    \item Vérification logs applicatifs : /var/log/bnh-bilans/
+    \item Contrôle espace disque serveur : df -h
+    \item Vérification santé application : http://server:8080/bnh-bilans/actuator/health
+    \item Sauvegarde base de données : script backup-db.sh
+\end{itemize}
+
+\textbf{Maintenance hebdomadaire :}
+\begin{itemize}
+    \item Rotation des logs avec logrotate
+    \item Nettoyage fichiers temporaires
+    \item Vérification performances base de données
+    \item Test restauration sauvegarde
+\end{itemize}
+
+\textbf{Maintenance mensuelle :}
+\begin{itemize}
+    \item Mise à jour sécurité système
+    \item Optimisation base de données
+    \item Révision des configurations
+    \item Test plan de reprise d'activité
+\end{itemize}
+
+\chapter{Captures d'écran détaillées}
+\label{app:captures}
+
+\section{Interface d'administration}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=14cm]{admin_users_management.png}
+    \caption{Interface de gestion des utilisateurs.}
+    \label{fig:admin-users}
+\end{figure}
+
+L'interface de gestion des utilisateurs permet :
+\begin{itemize}
+    \item Création/modification/suppression des comptes utilisateur
+    \item Attribution des rôles et permissions
+    \item Gestion des groupes d'accès
+    \item Monitoring de l'activité utilisateur
+    \item Export des logs d'audit
+\end{itemize}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=14cm]{admin_system_config.png}
+    \caption{Interface de configuration système.}
+    \label{fig:admin-config}
+\end{figure}
+
+\section{Module de monitoring}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=14cm]{monitoring_dashboard.png}
+    \caption{Tableau de bord de monitoring système.}
+    \label{fig:monitoring}
+\end{figure}
+
+Le tableau de bord de monitoring affiche :
+\begin{itemize}
+    \item Métriques de performance en temps réel
+    \item Utilisation des ressources système
+    \item Statut des connexions base de données
+    \item Historique des temps de réponse
+    \item Alertes système actives
+\end{itemize}
+
+\section{Interface de consultation}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=14cm]{consultation_bilans.png}
+    \caption{Interface de consultation des bilans historiques.}
+    \label{fig:consultation}
+\end{figure}
+
+L'interface de consultation propose :
+\begin{itemize}
+    \item Recherche multicritères dans l'historique
+    \item Prévisualisation intégrée des documents
+    \item Comparaison entre plusieurs bilans
+    \item Export et partage sécurisé
+    \item Annotations collaboratives
+\end{itemize}
+
+\chapter{Métriques et statistiques}
+\label{app:metriques}
+
+\section{Indicateurs de performance technique}
+
+\subsection{Temps de réponse par fonctionnalité}
+
+\begin{longtable}{|l|c|c|c|c|}
+    \hline
+    \textbf{Fonctionnalité}    & \textbf{Temps moyen} & \textbf{Temps médian} & \textbf{95e percentile} & \textbf{Max observé} \\ \hline
+    Authentification           & 0.8s                 & 0.7s                  & 1.2s                    & 2.1s                 \\ \hline
+    Extraction données         & 45s                  & 42s                   & 78s                     & 120s                 \\ \hline
+    Calcul indicateurs         & 25s                  & 22s                   & 48s                     & 65s                  \\ \hline
+    Génération PDF             & 15s                  & 12s                   & 28s                     & 35s                  \\ \hline
+    Export Excel               & 8s                   & 7s                    & 15s                     & 22s                  \\ \hline
+    Chargement tableau de bord & 2.1s                 & 1.8s                  & 3.5s                    & 4.8s                 \\ \hline
+    \caption{Métriques de performance par fonctionnalité.}
+    \label{tab:performance-metriques}
+\end{longtable}
+
+\subsection{Utilisation des ressources système}
+
+\textbf{Consommation mémoire :}
+\begin{itemize}
+    \item Mémoire moyenne : 2.1 GB
+    \item Pic maximum observé : 3.8 GB
+    \item Mémoire heap JVM : 70\% de 4GB alloués
+    \item Garbage collection : < 2\% du temps total
+\end{itemize}
+
+\textbf{Utilisation CPU :}
+\begin{itemize}
+    \item Charge moyenne : 15\%
+    \item Pic lors de génération : 85\%
+    \item Temps de réponse maintenu < 5s même à 80\% CPU
+    \item Scaling linéaire observé jusqu'à 20 utilisateurs simultanés
+\end{itemize}
+
+\section{Indicateurs d'usage}
+
+\subsection{Statistiques d'utilisation mensuelle}
+
+\begin{longtable}{|l|c|c|c|}
+    \hline
+    \textbf{Mois} & \textbf{Bilans générés} & \textbf{Utilisateurs actifs} & \textbf{Temps économisé} \\ \hline
+    Janvier 2024  & 45                      & 12                           & 98 heures                \\ \hline
+    Février 2024  & 52                      & 15                           & 112 heures               \\ \hline
+    Mars 2024     & 48                      & 14                           & 105 heures               \\ \hline
+    Avril 2024    & 61                      & 18                           & 128 heures               \\ \hline
+    Mai 2024      & 58                      & 16                           & 122 heures               \\ \hline
+    Juin 2024     & 55                      & 17                           & 118 heures               \\ \hline
+    \caption{Évolution de l'usage mensuel du système.}
+    \label{tab:usage-mensuel}
+\end{longtable}
+
+\subsection{Répartition par type de bilan}
+
+\begin{itemize}
+    \item Bilans mensuels synthétiques : 45\%
+    \item Bilans détaillés par aide : 25\%
+    \item Rapports géographiques : 15\%
+    \item Analyses comparatives : 10\%
+    \item Tableaux de bord : 5\%
+\end{itemize}
+
+\section{Indicateurs qualité}
+
+\subsection{Taux d'erreur et incidents}
+
+\textbf{Période : 6 premiers mois d'exploitation}
+\begin{itemize}
+    \item Incidents majeurs : 2 (indisponibilité > 1h)
+    \item Incidents mineurs : 8 (dégradation performance)
+    \item Taux d'erreur moyen : 1.2\%
+    \item MTTR (temps moyen de résolution) : 45 minutes
+    \item Disponibilité effective : 99.7\%
+\end{itemize}
+
+\subsection{Satisfaction utilisateur détaillée}
+
+\textbf{Résultats enquête trimestrielle (25 répondants) :}
+\begin{itemize}
+    \item Facilité d'apprentissage : 4.3/5
+    \item Efficacité d'utilisation : 4.8/5
+    \item Mémorisation des procédures : 4.5/5
+    \item Fréquence d'erreurs : 4.6/5 (peu d'erreurs)
+    \item Satisfaction subjective : 4.7/5
+    \item Recommandation à d'autres services : 94\%
+\end{itemize}
+
+\chapter{Références et bibliographie}
+\label{app:references}
+
+\section{Documentation technique consultée}
+
+\begin{itemize}
+    \item Oracle Corporation. (2021). \textit{Oracle Database 12c Administrator's Guide}. Oracle Press.
+    \item Walls, C. (2020). \textit{Spring Boot in Action, Second Edition}. Manning Publications.
+    \item Johnson, R. et al. (2019). \textit{Professional Java Development with the Spring Framework}. Wrox Press.
+    \item Apache Software Foundation. (2021). \textit{Apache Tomcat 9 Configuration Reference}.
+    \item Hibernate Team. (2021). \textit{Hibernate ORM User Guide}. Red Hat Inc.
+\end{itemize}
+
+\section{Standards et normes appliqués}
+
+\begin{itemize}
+    \item ISO/IEC 25010:2011 - Systems and software Quality Requirements and Evaluation (SQuaRE)
+    \item ISO/IEC 27001:2013 - Information Security Management Systems
+    \item WCAG 2.1 - Web Content Accessibility Guidelines
+    \item IEEE 830-1998 - Recommended Practice for Software Requirements Specifications
+    \item PMI PMBOK Guide - Project Management Body of Knowledge
+\end{itemize}
+
+\section{Réglementation bancaire de référence}
+
+\begin{itemize}
+    \item Règlement Banque d'Algérie n° 11-08 relatif au contrôle interne des banques et établissements financiers
+    \item Instruction Banque d'Algérie n° 74-94 relative à la fixation des règles prudentielles
+    \item Circulaire Banque d'Algérie n° 01-2021 relative à la sécurité des systèmes d'information bancaires
+    \item Loi n° 18-05 relative à la protection des données à caractère personnel
+\end{itemize}
+
+\section{Articles et publications de référence}
+
+\begin{itemize}
+    \item Davenport, T. H. (2019). "The Future of Work in Technology-Mediated Financial Services". \textit{Harvard Business Review}, 97(3), 45-52.
+    \item Chen, L. et al. (2020). "Digital Transformation in Banking: Challenges and Opportunities in Emerging Markets". \textit{Journal of Financial Technology}, 15(2), 23-38.
+    \item Benlahcene, A. (2021). "Modernisation du secteur bancaire algérien : enjeux et perspectives". \textit{Revue d'Économie du Maghreb}, 28(4), 112-128.
+    \item KPMG. (2022). \textit{Banking Automation: Global Survey Report}. KPMG International.
+    \item McKinsey & Company. (2021). \textit{The Future of Bank Risk Management}. McKinsey Global Institute.
+\end{itemize}

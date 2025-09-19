@@ -1,0 +1,300 @@
+\chapter{Analyse et conception de la solution}
+\clearpage
+\label{chap:conception}
+
+\section{Introduction}
+
+Ce chapitre présente la démarche de conception adoptée pour développer l'outil d'automatisation des bilans mensuels relatifs aux aides au logement rural. La conception s'appuie sur une analyse rigoureuse des besoins identifiés précédemment et propose une architecture technique robuste, évolutive et adaptée à l'environnement technologique de la BNH. Nous y détaillons les choix architecturaux, la modélisation UML du système, et les technologies retenues.
+
+\section{Architecture technique de l'outil d'automatisation}
+
+\subsection{Approche architecturale générale}
+
+L'architecture proposée suit les principes de conception modulaire et s'inspire du pattern architectural MVC (Model-View-Controller) étendu en architecture multicouches. Cette approche garantit la séparation des préoccupations, la maintenabilité du code, et la facilité d'évolution du système.
+
+\medskip
+
+L'architecture se décompose en cinq couches principales :
+
+\textbf{Couche présentation :} Interface web responsive développée en HTML5/CSS3/JavaScript, utilisant le framework Bootstrap pour assurer la compatibilité multi-navigateurs et la responsivité.
+
+\textbf{Couche contrôleur :} Servlets Java gérant les requêtes HTTP, l'orchestration des traitements métier, et la gestion des sessions utilisateur.
+
+\textbf{Couche service :} Services métier implémentant la logique applicative, les règles de calcul des indicateurs, et l'orchestration des traitements de données.
+
+\textbf{Couche accès aux données :} Couche d'abstraction utilisant le pattern DAO (Data Access Object) pour l'accès unifié aux différentes sources de données.
+
+\textbf{Couche données :} Bases de données Oracle existantes et nouveau schéma dédié à l'application pour la gestion des configurations et l'historisation.
+
+\subsection{Architecture détaillée du système}
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=14cm]{architecture_generale.png}
+    \caption{Architecture générale du système d'automatisation des bilans.}
+    \label{fig:architecture-generale}
+\end{figure}
+
+L'architecture détaillée intègre plusieurs composants spécialisés :
+
+\medskip
+
+\textbf{Module d'intégration de données :} Responsable de l'extraction, la transformation et le chargement (ETL) des données depuis les sources existantes. Il utilise des connecteurs JDBC pour Oracle et implémente des règles de nettoyage et de validation des données.
+
+\textbf{Module de calcul d'indicateurs :} Engine de calcul gérant les formules complexes, les agrégations multidimensionnelles, et la génération d'indicateurs statistiques. Il est conçu pour être extensible et permettre l'ajout de nouveaux indicateurs via configuration.
+
+\textbf{Module de génération de rapports :} Générateur de bilans utilisant JasperReports pour la mise en forme et la production de documents PDF/Excel. Il intègre des templates personnalisables et une engine de graphiques basée sur JFreeChart.
+
+\textbf{Module d'administration :} Interface dédiée à la gestion des utilisateurs, la configuration des paramètres système, et le monitoring des performances. Il intègre des fonctionnalités d'audit et de log centralisé.
+
+\textbf{Module de sécurité :} Gestion de l'authentification via LDAP, autorisation basée sur les rôles (RBAC), et chiffrement des communications. Il assure la conformité aux exigences de sécurité bancaire.
+
+\section{Modélisation des données et processus métier}
+
+\subsection{Modèle conceptuel des données}
+
+La modélisation conceptuelle identifie les entités principales du domaine métier et leurs relations :
+
+\medskip
+
+\textbf{Entité Bénéficiaire :} Représente les personnes physiques bénéficiaires des aides, avec leurs caractéristiques socio-économiques et géographiques.
+
+\textbf{Entité Dossier :} Centralise les informations relatives à chaque demande d'aide, incluant le type d'aide, le montant, l'état d'avancement, et les dates clés.
+
+\textbf{Entité Aide :} Référentiel des différents types d'aides disponibles avec leurs critères d'éligibilité et modalités de calcul.
+
+\textbf{Entité Versement :} Trace les versements effectués avec les montants, dates, et références comptables.
+
+\textbf{Entité Zone Géographique :} Hiérarchie géographique (wilaya, commune, localité) avec les caractéristiques de classement rural/urbain.
+
+\textbf{Entité Bilan :} Métadonnées des bilans générés avec versioning, paramètres de génération, et statuts de validation.
+
+\subsection{Modèle logique de données}
+
+Le modèle logique de données traduit le modèle conceptuel en structure relationnelle optimisée :
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=15cm]{modele_logique_donnees.png}
+    \caption{Modèle logique de données du système.}
+    \label{fig:modele-logique}
+\end{figure}
+
+Les principales tables incluent :
+
+\begin{itemize}
+    \item \texttt{T\_BENEFICIAIRES} : Données des bénéficiaires avec index sur les critères de recherche fréquents
+    \item \texttt{T\_DOSSIERS} : Dossiers de demande avec contraintes d'intégrité référentielle
+    \item \texttt{T\_VERSEMENTS} : Historique des versements avec partitioning par année
+    \item \texttt{T\_BILANS\_CONFIG} : Paramètres de configuration des bilans
+    \item \texttt{T\_BILANS\_HISTORIQUE} : Archive des bilans générés avec compression
+\end{itemize}
+
+\subsection{Processus métier modélisés}
+
+Les principaux processus métier automatisés incluent :
+
+\medskip
+
+\textbf{Processus d'extraction de données :} Orchestration des extractions depuis les sources multiples avec gestion des erreurs et retry automatique.
+
+\textbf{Processus de validation des données :} Application des règles de cohérence métier avec génération d'alertes pour les anomalies détectées.
+
+\textbf{Processus de calcul d'indicateurs :} Exécution séquentielle des calculs avec dépendances entre indicateurs et optimisation des performances.
+
+\textbf{Processus de génération de bilans :} Production des documents finaux avec application des templates et validation des sorties.
+
+\section{Diagrammes UML}
+
+\subsection{Diagramme de cas d'utilisation}
+
+Le diagramme de cas d'utilisation global illustre les interactions entre les acteurs et le système :
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=14cm]{diagramme_cas_utilisation.png}
+    \caption{Diagramme de cas d'utilisation du système.}
+    \label{fig:cas-utilisation}
+\end{figure}
+
+Les cas d'utilisation principaux incluent :
+
+\begin{itemize}
+    \item Authentification des utilisateurs
+    \item Configuration des paramètres de bilans
+    \item Lancement de génération de bilans
+    \item Consultation des bilans générés
+    \item Gestion des utilisateurs et droits d'accès
+    \item Monitoring et administration système
+\end{itemize}
+
+\subsection{Diagramme de classes}
+
+Le diagramme de classes détaille la structure orientée objet du système :
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=15cm]{diagramme_classes.png}
+    \caption{Diagramme de classes principal du système.}
+    \label{fig:classes}
+\end{figure}
+
+Les classes principales incluent :
+
+\medskip
+
+\textbf{Classes métier :} \texttt{Beneficiaire}, \texttt{Dossier}, \texttt{Aide}, \texttt{Versement}, représentant les entités du domaine.
+
+\textbf{Classes de service :} \texttt{BilanGeneratorService}, \texttt{DataExtractionService}, \texttt{IndicatorCalculationService}, implémentant la logique métier.
+
+\textbf{Classes DAO :} \texttt{BeneficiaireDAO}, \texttt{DossierDAO}, \texttt{VersementDAO}, gérant l'accès aux données.
+
+\textbf{Classes utilitaires :} \texttt{DatabaseUtil}, \texttt{SecurityUtil}, \texttt{ReportUtil}, fournissant des services transverses.
+
+\subsection{Diagramme de séquence}
+
+Le diagramme de séquence pour la génération de bilan illustre le flux d'exécution :
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=15cm]{diagramme_sequence_generation.png}
+    \caption{Diagramme de séquence - Génération de bilan mensuel.}
+    \label{fig:sequence-generation}
+\end{figure}
+
+Le processus se déroule en plusieurs étapes :
+
+\begin{enumerate}
+    \item Authentification de l'utilisateur et vérification des droits
+    \item Validation des paramètres de génération saisis
+    \item Extraction des données depuis les sources multiples
+    \item Application des règles de validation et nettoyage
+    \item Calcul des indicateurs selon les formules configurées
+    \item Génération du rapport avec template sélectionné
+    \item Archivage du bilan et notification à l'utilisateur
+\end{enumerate}
+
+\section{Choix technologiques et justifications}
+
+\subsection{Technologies côté serveur}
+
+Les technologies sélectionnées pour le développement côté serveur sont :
+
+\medskip
+
+\textbf{Java EE 8 :} Choisi pour sa maturité, sa compatibilité avec l'environnement existant, et la disponibilité des compétences au sein de l'équipe. Java EE offre un écosystème riche avec les servlets, JSP, et les API d'accès aux données.
+
+\textbf{Spring Framework 5.x :} Framework d'intégration pour la gestion de l'inversion de contrôle, l'injection de dépendances, et la programmation orientée aspect. Spring facilite les tests unitaires et l'intégration avec d'autres frameworks.
+
+\textbf{Hibernate 5.x :} ORM (Object-Relational Mapping) pour l'abstraction de l'accès aux données Oracle. Hibernate simplifie la gestion des entités et optimise les performances grâce à ses mécanismes de cache.
+
+\textbf{Apache Tomcat 9.x :} Serveur d'application léger, compatible avec l'infrastructure existante et offrant de bonnes performances pour les applications web Java.
+
+\subsection{Technologies côté client}
+
+L'interface utilisateur s'appuie sur des technologies web modernes :
+
+\medskip
+
+\textbf{HTML5/CSS3 :} Standards web modernes garantissant la compatibilité navigateur et l'accessibilité. CSS3 permet l'implémentation d'interfaces responsive sans framework JavaScript lourd.
+
+\textbf{JavaScript ES6+ :} Langage côté client pour l'interactivité, les validations, et les appels AJAX. L'utilisation d'ES6+ améliore la lisibilité et la maintenabilité du code.
+
+\textbf{Bootstrap 4.x :} Framework CSS responsive garantissant la compatibilité multi-dispositifs et accélérant le développement d'interfaces utilisateur cohérentes.
+
+\textbf{Chart.js :} Bibliothèque JavaScript pour la génération de graphiques interactifs, choisie pour sa légèreté et sa compatibilité avec les navigateurs de l'entreprise.
+
+\subsection{Technologies de données et reporting}
+
+Les technologies de gestion des données et reporting incluent :
+
+\medskip
+
+\textbf{Oracle Database 12c :} SGBD existant de la BNH, maintenu pour assurer la continuité avec l'écosystème existant. Les optimisations se focalisent sur l'indexation et le partitioning des nouvelles tables.
+
+\textbf{JasperReports 6.x :} Engine de génération de rapports open source, choisi pour sa flexibilité, ses capacités d'export multiformats, et son intégration native avec Java.
+
+\textbf{Apache POI :} Bibliothèque Java pour la manipulation des documents Microsoft Office, utilisée pour les exports Excel et l'import de templates existants.
+
+\textbf{iText PDF :} Bibliothèque pour la génération et manipulation de documents PDF, offrant un contrôle fin de la mise en page et la compatibilité avec les standards d'archivage.
+
+\subsection{Outils de développement et qualité}
+
+L'environnement de développement intègre des outils modernes :
+
+\medskip
+
+\textbf{Eclipse IDE :} Environnement de développement intégré, familier à l'équipe et offrant une intégration complète avec l'écosystème Java/Spring.
+
+\textbf{Maven :} Outil de build et de gestion des dépendances, permettant l'automatisation du processus de build et la gestion cohérente des versions de bibliothèques.
+
+\textbf{Git :} Système de contrôle de version distribué pour la gestion collaborative du code source et la traçabilité des modifications.
+
+\textbf{JUnit 5 :} Framework de tests unitaires pour assurer la qualité du code et faciliter les évolutions futures.
+
+\textbf{SonarQube :} Plateforme d'analyse de qualité de code pour identifier les vulnérabilités, bugs, et code smells.
+
+\section{Conception de l'interface utilisateur}
+
+\subsection{Principes de design adoptés}
+
+La conception de l'interface utilisateur suit plusieurs principes fondamentaux :
+
+\medskip
+
+\textbf{Simplicité et ergonomie :} Interface épurée privilégiant la facilité d'utilisation par des utilisateurs non-techniques.
+
+\textbf{Cohérence visuelle :} Respect de la charte graphique de la BNH et utilisation d'éléments visuels cohérents.
+
+\textbf{Accessibilité :} Conformité aux standards d'accessibilité web (WCAG 2.1) pour garantir l'utilisation par tous les utilisateurs.
+
+\textbf{Responsive design :} Adaptation automatique aux différentes tailles d'écrans (desktop, tablette, mobile).
+
+\subsection{Architecture de l'interface}
+
+L'interface s'organise autour de plusieurs zones fonctionnelles :
+
+\medskip
+
+\textbf{Zone de navigation :} Menu principal avec accès aux différents modules selon les droits utilisateur.
+
+\textbf{Zone de travail :} Espace principal d'affichage du contenu avec breadcrumb pour la navigation.
+
+\textbf{Zone d'information :} Affichage des notifications, alertes, et messages contextuels.
+
+\textbf{Zone d'administration :} Panneau latéral pour les fonctions d'administration et de configuration.
+
+\subsection{Maquettes principales}
+
+Les maquettes d'écran principales incluent :
+
+\begin{figure}[hbt!]
+    \centering
+    \includegraphics[width=14cm]{maquette_tableau_bord.png}
+    \caption{Maquette - Tableau de bord principal.}
+    \label{fig:maquette-tableau-bord}
+\end{figure}
+
+\textbf{Tableau de bord :} Vue d'ensemble avec indicateurs clés, derniers bilans générés, et accès rapides aux fonctions principales.
+
+\textbf{Interface de génération :} Formulaire de paramétrage avec sélection de période, types d'aides, et options de format.
+
+\textbf{Console de monitoring :} Suivi en temps réel des traitements avec barres de progression et logs détaillés.
+
+\textbf{Bibliothèque de bilans :} Historique des bilans générés avec fonctions de recherche, tri, et téléchargement.
+
+\section{Conclusion}
+
+La conception présentée dans ce chapitre propose une solution technique robuste et évolutive, répondant aux besoins identifiés lors de l'analyse de l'existant. L'architecture multicouches garantit la séparabilité des préoccupations et facilite la maintenance future du système.
+
+\medskip
+
+Les choix technologiques effectués privilégient la compatibilité avec l'environnement existant de la BNH tout en introduisant des technologies modernes pour améliorer l'efficacité du développement et la qualité du produit final.
+
+\medskip
+
+La modélisation UML détaillée fournit une base solide pour la phase de développement, tandis que la conception d'interface assure une expérience utilisateur optimisée.
+
+\medskip
+
+Le chapitre suivant présente la mise en œuvre concrète de cette conception à travers la réalisation du système, incluant les aspects de développement, d'intégration, et de déploiement.
